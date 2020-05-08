@@ -4,6 +4,7 @@
 
 Repository created to demonstrate the functioning and performance of an API in **Adonis.js**
 </center>
+
 ## Install
 Use the adonis command to install the blueprint
 ```bash
