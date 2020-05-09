@@ -20,5 +20,8 @@ Route.post('/login', 'AuthController.login')
 
 Route.group(() => {
   Route.resource('genres', 'GenreController').apiOnly()
+  .validator(new Map([
+    [['genres.store'], ['GenreRequest']]
+  ]))
   Route.resource('movies', 'MovieController').apiOnly()
 }).prefix('api/v1').middleware(['auth'])
