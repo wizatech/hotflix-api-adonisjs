@@ -9,6 +9,8 @@ Repository created to demonstrate the functioning and performance of an API in *
 Use the adonis command to install the blueprint
 ```bash
 > npm install
+> cp .env.example .env
+> adonis key:generate
 > adonis migration:run
 > adonis seed --files DatabaseSeeder.js
 > adonis serve --dev
