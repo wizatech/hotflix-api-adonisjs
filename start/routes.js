@@ -15,10 +15,10 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+Route.post('/users', 'UserController.create')
+Route.post('/login', 'AuthController.login')
 
 Route.group(() => {
-  Route.post('/users', 'UserController.create')
-  Route.post('/login', 'AuthController.login')
   Route.resource('genres', 'GenreController').apiOnly()
   Route.resource('movies', 'MovieController').apiOnly()
-}).prefix('api/v1')
+}).prefix('api/v1').middleware(['auth'])
