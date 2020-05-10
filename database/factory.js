@@ -20,3 +20,13 @@ Factory.blueprint('App/Models/Genre', (faker) => {
     description: faker.last()
   }
 })
+
+Factory.blueprint('App/Models/Movie', (faker) => {
+  return {
+    name: faker.name(),
+    title: faker.sentence({ words: 5 }),
+    description: faker.last(),
+    year: faker.year({ min: 2000, max: 2020 }),
+    image: faker.url({extensions: ['gif', 'jpg', 'png']})
+  }
+})

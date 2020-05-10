@@ -2,8 +2,9 @@
 
 class GenreRequest {
   get rules () {
+    const genreId = this.ctx.params.id ? this.ctx.params.id : ''
     return {
-      name: 'required|unique: genres, name',
+      name: `required|unique:movies,title,id,${genreId}`,
       description: 'required|unique: genres, description'
     }
   }
