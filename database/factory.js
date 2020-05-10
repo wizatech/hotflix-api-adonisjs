@@ -16,7 +16,7 @@ const Factory = use('Factory')
 
 Factory.blueprint('App/Models/Genre', (faker) => {
   return {
-    name: faker.unique().name(),
-    description: faker.unique().last()
+    name: faker.name(),
+    description: faker.last()
   }
 })
