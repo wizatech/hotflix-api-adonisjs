@@ -6,7 +6,7 @@ const Model = use('Model')
 class Movie extends Model {
   genres () {
     return this
-      .belongsToMany('App/Models/Genreadonis repladonis repl')
+      .belongsToMany('App/Models/Genre')
       .pivotTable('genre_movie')
   }
 }
