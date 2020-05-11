@@ -16,7 +16,7 @@ class MovieService {
     const trx = await Database.beginTransaction()
     try {
       const movie =  await Movie.create(request.only(["name", "title", "description", "year", "image"]), trx)
-      console.log(request.genres)
+      console.log(request.all())
       const genreToMovie = await movie.genres().sync(["397be5e2-6aa7-48a3-9a58-75f5accbcb41", "7994494e-925a-40be-8fb0-7dc0709c567d"], null, trx)
       await trx.commit()
       await movie.load('genres')

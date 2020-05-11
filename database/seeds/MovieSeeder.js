@@ -1,21 +1,16 @@
 'use strict'
 
-/*
-|--------------------------------------------------------------------------
-| MovieSeeder
-|--------------------------------------------------------------------------
-|
-| Make use of the Factory instance to seed database with dummy data or
-| make use of Lucid models directly.
-|
-*/
-
-/** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
+const Database = use('Database')
 
 class MovieSeeder {
   static async run () {
-    await Factory.model('App/Models/Movie').createMany(10)
+    const movies = await Factory.model('App/Models/Movie').createMany(3)
+    let randomOrderGenres = await Database.table('genres')
+    .orderBy(Database.raw('random()')).limit(2).pluck('id')
+    movies.forEach( (movie) => {
+        movie.genres().attach(randomOrderGenres)
+    })
   }
 }
 
