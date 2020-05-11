@@ -16,11 +16,11 @@ class MovieService {
     const trx = await Database.beginTransaction()
     try {
       const movie =  await Movie.create(request.only(["name", "title", "description", "year", "image"]), trx)
-      const genre = await Genre.find('397be5e2-6aa7-48a3-9a58-75f5accbcb41')
-      const genreToMovie = await movie.genres().sync([genre.id], null, trx)
+      console.log(request.genres)
+      const genreToMovie = await movie.genres().sync(["397be5e2-6aa7-48a3-9a58-75f5accbcb41", "7994494e-925a-40be-8fb0-7dc0709c567d"], null, trx)
       await trx.commit()
-      console.log(movie.loadMany(['genres']))
-      return await movie;
+      await movie.load('genres')
+      return await movie.getRelated('genres');
     } catch (error) {
       console.log(error)
       await trx.rollback()
