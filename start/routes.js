@@ -24,4 +24,8 @@ Route.group(() => {
     [['genres.store'], ['GenreRequest']]
   ]))
   Route.resource('movies', 'MovieController').apiOnly()
+  .validator(new Map([
+    [['movies.store'], ['MovieRequest']],
+    [['movies.update'], ['MovieRequest']]
+  ]))
 }).prefix('api/v1').middleware(['auth'])
