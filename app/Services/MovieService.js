@@ -16,12 +16,14 @@ class MovieService {
     const trx = await Database.beginTransaction()
     try {
       const movie =  await Movie.create(request.only(["name", "title", "description", "year", "image"]), trx)
-      let genres = JSON.parse(request.input('genres'))
-      await  movie.genres().sync([Object.values(genres[0])[0]], null, trx)
-
+      let genres = request.input('genres')
+      if(genres) {
+        let genres = JSON.parse(request.input('genres'))
+        await  movie.genres().sync([Object.values(genres[0])[0]], null, trx)
+      }
       await trx.commit()
       await movie.load('genres')
-      return await movie.getRelated('genres');
+      return await movie;
     } catch (error) {
       console.log(error)
       Logger.error(error)
